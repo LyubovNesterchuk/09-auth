@@ -3,7 +3,7 @@ import { api } from '../../api';
 import { cookies } from 'next/headers';
 
 import { isAxiosError } from 'axios';
-import { logErrorResponse } from '../../utils/utils';
+import { logErrorResponse } from '../../_utils/utils';
 
 type Props = {
   params: Promise<{ id: string }>;

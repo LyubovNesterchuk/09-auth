@@ -1,15 +1,14 @@
 import type { NextConfig } from "next";
 
-// const nextConfig: NextConfig = {
-//   /* config options here */
-// };
-
-// export default nextConfig;
-
-const nextConfig = {
+const nextConfig: NextConfig = {
   images: {
-    domains: ['ac.goit.global'],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "ac.goit.global",
+      },
+    ],
   },
 };
 
-module.exports = nextConfig;
+export default nextConfig;
