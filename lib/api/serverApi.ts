@@ -5,20 +5,17 @@ import { Note } from '@/types/note';
 
 // -- Auth ------------------
 
-export const checkServerSession = async (): Promise<boolean> => {
+export const checkServerSession = async () => {
+  
   const cookieStore = await cookies();
-
-  try {
-    const res = await nextServer.get("/auth/session", {
-      headers: { Cookie: cookieStore.toString() },
-    });
-    return res.status === 200;
-  } catch (error: any) {
-    if (error.response?.status === 400 || error.response?.status === 401) {
-      return false;
-    }
-    throw error;
-  }
+  
+  const res = await nextServer.get('/auth/session', {
+    headers: {
+      Cookie: cookieStore.toString(),
+    },
+  });
+  
+  return res;
 };
 
 // ------------------ User ------------------
@@ -55,17 +52,6 @@ export const getServerNoteById = async (noteId: string): Promise<Note> => {
   return data;
 };
 
-// export const checkServerSession = async () => {
-  
-//   const cookieStore = await cookies();
-
-//   const response = await nextServer.get('/auth/session', {
-//     headers: {
-//         Cookie: cookieStore.toString(), 
-//     },
-//   });
-//     return response;
-// };
 
 
 
