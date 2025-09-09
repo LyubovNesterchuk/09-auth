@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useId } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
@@ -9,7 +9,6 @@ import styles from './NoteForm.module.css';
 import { useNoteDraftStore } from '@/lib/store/noteStore';
 import { NewNote } from '@/types/note';
 import { createNote } from '@/lib/api/clientApi';
-
 
 export default function NoteForm() {
   const queryClient = useQueryClient();
@@ -32,7 +31,7 @@ export default function NoteForm() {
     onSuccess: () => {
       toast.success('Note created!');
       queryClient.invalidateQueries({ queryKey: ['notes'] });
-      clearDraft(); 
+      clearDraft();
       router.push('/notes/filter/all');
     },
     onError: () => toast.error('Failed to create note'),
@@ -40,33 +39,34 @@ export default function NoteForm() {
 
   const handleSubmit = (formData: FormData) => {
     const values: NewNote = {
-      title: formData.get("title") as string,
-      content: formData.get("content") as string,
-      tag: formData.get("tag") as string,
+      title: formData.get('title') as string,
+      content: formData.get('content') as string,
+      tag: formData.get('tag') as string,
     };
 
-  mutate(values);
-};
+    mutate(values);
+  };
 
-   const handleCancel = () => {
-    // router.back();
+  const handleCancel = () => {
     router.push('/notes/filter/all');
   };
 
   return (
-  // <form className={styles.form} action={handleSubmit}>
-    <form className={styles.form} onSubmit={(e) => {
-      e.preventDefault();
-      const formData = new FormData(e.currentTarget);
-      handleSubmit(formData);
-    }}> 
+    <form
+      className={styles.form}
+      onSubmit={(e) => {
+        e.preventDefault();
+        const formData = new FormData(e.currentTarget);
+        handleSubmit(formData);
+      }}
+    >
       <div className={styles.formGroup}>
         <label htmlFor={`${fieldId}-title`}>Title</label>
         <input
           id={`${fieldId}-title`}
           type="text"
           name="title"
-          defaultValue={draft?.title}
+          value={draft?.title ?? ''}
           onChange={handleChange}
           required
           className={styles.input}
@@ -79,7 +79,7 @@ export default function NoteForm() {
           id={`${fieldId}-content`}
           name="content"
           rows={8}
-          defaultValue={draft?.content}
+          value={draft?.content ?? ''}
           onChange={handleChange}
           className={styles.textarea}
         />
@@ -90,8 +90,7 @@ export default function NoteForm() {
         <select
           id={`${fieldId}-tag`}
           name="tag"
-          // defaultValue={draft?.tag}
-          defaultValue={draft?.tag === "all" ? "Todo" : draft?.tag ?? "Todo"}
+          value={draft?.tag ?? 'Todo'}
           onChange={handleChange}
           className={styles.select}
         >
@@ -100,16 +99,15 @@ export default function NoteForm() {
           <option value="Personal">Personal</option>
           <option value="Meeting">Meeting</option>
           <option value="Shopping">Shopping</option>
-           <option value="Ideas">Ideas</option>
-          <option value="Travel">Travel</option>
-          <option value="Finance">Finance</option>
-          <option value="Health">Health</option>
-          <option value="Important">Important</option>         
         </select>
       </div>
 
       <div className={styles.actions}>
-        <button type="button" onClick={handleCancel} className={styles.cancelButton}>
+        <button
+          type="button"
+          onClick={handleCancel}
+          className={styles.cancelButton}
+        >
           Cancel
         </button>
         <button type="submit" disabled={isPending} className={styles.submitButton}>
@@ -118,4 +116,4 @@ export default function NoteForm() {
       </div>
     </form>
   );
-};
+}
