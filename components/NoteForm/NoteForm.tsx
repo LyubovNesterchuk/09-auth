@@ -55,12 +55,12 @@ export default function NoteForm() {
   };
 
   return (
-    // <form className={styles.form} action={handleSubmit}>
+  // <form className={styles.form} action={handleSubmit}>
     <form className={styles.form} onSubmit={(e) => {
       e.preventDefault();
       const formData = new FormData(e.currentTarget);
       handleSubmit(formData);
-    }}>
+    }}> 
       <div className={styles.formGroup}>
         <label htmlFor={`${fieldId}-title`}>Title</label>
         <input
@@ -101,6 +101,11 @@ export default function NoteForm() {
           <option value="Personal">Personal</option>
           <option value="Meeting">Meeting</option>
           <option value="Shopping">Shopping</option>
+           <option value="Ideas">Ideas</option>
+          <option value="Travel">Travel</option>
+          <option value="Finance">Finance</option>
+          <option value="Health">Health</option>
+          <option value="Important">Important</option>         
         </select>
       </div>
 
