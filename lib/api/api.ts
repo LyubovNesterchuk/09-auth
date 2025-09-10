@@ -1,21 +1,21 @@
 
 import axios from "axios";
 
-export const nextServer = axios.create({
-  baseURL: "/api",
-  withCredentials: true,
-});
+// export const nextServer = axios.create({
+//   baseURL: "/api",
+//   withCredentials: true,
+// });
 
 
 
 // ---------------2
 
-// const baseURL = process.env.NEXT_PUBLIC_API_URL + "/api";
+const baseURL = process.env.NEXT_PUBLIC_API_URL + "/api";
 
-// export const nextServer = axios.create({
-//   baseURL: baseURL,
-//   withCredentials: true,
-// });
+export const nextServer = axios.create({
+  baseURL: baseURL,
+  withCredentials: true,
+});
 
 
 // ----------------1
